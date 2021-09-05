@@ -1,7 +1,7 @@
 public class Buyer implements Runnable {
 	private final AutoShop shop;
-	private final int carsPurchased = 3;
-	final long buyerWaiting = 1000;
+	private static final int CARSPURCHASED = 2;
+	private static final long BUYERWAITING = 1000;
 	
 	
 	public Buyer(AutoShop shop) {
@@ -10,7 +10,7 @@ public class Buyer implements Runnable {
 	
 	@Override
 	public void run() {
-		for (int i = 0; i <= carsPurchased; i++) {
+		for (int i = 0; i <= CARSPURCHASED; i++) {
 			synchronized (shop) {
 				try {
 					System.out.println(Thread.currentThread().getName() + " зашел в автосалон");
@@ -18,7 +18,7 @@ public class Buyer implements Runnable {
 						System.out.println("Машин нет!");
 						shop.wait();
 					}
-					Thread.sleep(buyerWaiting);
+					Thread.sleep(BUYERWAITING);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

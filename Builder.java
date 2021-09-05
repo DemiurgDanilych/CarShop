@@ -1,6 +1,6 @@
 public class Builder implements Runnable {
-	AutoShop shop;
-	final long buildTime = 3000;
+	private final AutoShop shop;
+	private static final long BUILDTIME = 3000;
 	
 	public Builder(AutoShop shop) {
 		this.shop = shop;
@@ -8,17 +8,18 @@ public class Builder implements Runnable {
 	
 	@Override
 	public void run() {
-		while (true) {
-			try {
-				Thread.sleep(buildTime);
+		try {
+			for (int i = 0; i < 9; i++) {
+				Thread.sleep(BUILDTIME);
 				System.out.println("Производитель Toyota выпустил 1 авто");
 				synchronized (shop) {
 					shop.getCars().add(new Car());
 					shop.notify();
 				}
-			} catch (InterruptedException e) {
-				e.printStackTrace();
 			}
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		}
+		
 	}
 }

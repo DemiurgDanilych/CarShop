@@ -7,8 +7,6 @@ public class Main {
 		new Thread(new Buyer(shop),"Покупатель 2").start();
 		new Thread(new Buyer(shop),"Покупатель 3").start();
 		
-		Thread builder = new Thread(new Builder(shop),"Производитель Toyota ");
-		builder.setDaemon(true);
-		builder.start();
+		new Thread(new Builder(shop),"Производитель Toyota ").start();
 	}
 }
